@@ -5,7 +5,7 @@
 ## Yeah, it's a BASH script. So what? Tool for the job, yo.
 
 ## The version of PE to make available to in our Vagrant environment
-PE_VERSION="3.3.2"
+PE_VERSION="3.7.2"
 
 ###########################################################
 ANSWERS=$1
@@ -22,12 +22,13 @@ cat > /etc/hosts <<EOH
 127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain
 ::1 localhost localhost.localdomain localhost6 localhost6.localdomain
 ###############################################################################
-192.168.137.10 master.vagrant.vm master
-192.168.137.11 agent1.vagrant.vm agent1
+192.168.1.7 master.vagrant.vm master
+192.168.1.8 add.master.vagrant.vm add.master
+192.168.1.9 agent1.vagrant.vm agent1
 
 ###############################################################################
 ## CNAMEs for CA server
-192.168.137.10 puppetca.vagrant.vm puppetca
+192.168.1.7 puppetca.vagrant.vm puppetca puppet.vagrant.vm puppet
 
 EOH
 
@@ -46,14 +47,15 @@ else
 fi
 
 ## Install PE with a specified answer file
-if [ ! -d '/opt/puppet/' ]; then
+#if [ ! -d '/opt/puppet/' ]; then
   # Assume puppet isn't installed
-  /vagrant/puppet/pe/${DIRNAME}/puppet-enterprise-installer \
-  -a /vagrant/puppet/pe/answers/${ANSWERS}
-else
-  echo "/opt/puppet exists. Assuming it's already installed."
-fi
+#  /vagrant/puppet/pe/${DIRNAME}/puppet-enterprise-installer \
+#  -a /vagrant/puppet/pe/answers/${ANSWERS}
+#else
+#  echo "/opt/puppet exists. Assuming it's already installed."
+#fi
 
+service iptables stop
 ## Bootstrap the master(s)
 if [[ "$1" == *master.txt ]]; then
   echo "==> Copying .ssh directory to /root/"
@@ -76,8 +78,8 @@ if [[ "$1" == *master.txt ]]; then
     echo "/vagrant/module_workspace exists. Assuming it's already installed."
   fi
 
-  echo "==> Linking /etc/puppetlabs/puppet/module_workspace"
-  if [ ! -d '/etc/puppetlabs/puppet/module_workspace' ]; then
-    ln -s /vagrant/module_workspace /etc/puppetlabs/puppet/module_workspace
-  fi
+  #echo "==> Linking /etc/puppetlabs/puppet/module_workspace"
+  #if [ ! -d '/etc/puppetlabs/puppet/module_workspace' ]; then
+  #  ln -s /vagrant/module_workspace /etc/puppetlabs/puppet/module_workspace
+  #fi
 fi
