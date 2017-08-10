@@ -5,7 +5,7 @@
 ## Yeah, it's a BASH script. So what? Tool for the job, yo.
 
 ## The version of PE to make available to in our Vagrant environment
-PE_VERSION="2016.5.1"
+PE_VERSION="2016.2.3"
 
 ###########################################################
 ANSWERS=$1
