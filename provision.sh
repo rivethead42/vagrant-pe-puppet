@@ -48,39 +48,7 @@ else
   echo "${DIRNAME} already present"
 fi
 
-## Install PE with a specified answer file
-#if [ ! -d '/opt/puppet/' ]; then
-  # Assume puppet isn't installed
-#  /vagrant/puppet/pe/${DIRNAME}/puppet-enterprise-installer \
-#  -a /vagrant/puppet/pe/answers/${ANSWERS}
-#else
-#  echo "/opt/puppet exists. Assuming it's already installed."
-#fi
-
 ## Bootstrap the master(s)
 if [[ "$1" == *master.txt ]]; then
-  #echo "==> Copying .ssh directory to /root/"
-  #cp -r /vagrant/puppet/.ssh/ /root/
-
-  ## Install some prerequisites
   yum install -y git
-
-  #echo "==> Installing r10k"
-  #if [ ! -f '/opt/puppet/bin/r10k' ]; then
-  #  /opt/puppet/bin/gem install r10k
-  #else
-  #  echo "/opt/puppet/bin/r10k esiests. Assuming it's already installed."
-  #fi
-
-  #echo "==> Creating /vagrant/module_workspace"
-  #if [ ! -d '/vagrant/module_workspace' ]; then
-  #  mkdir /vagrant/module_workspace
-  #else
-  #  echo "/vagrant/module_workspace exists. Assuming it's already installed."
-  #fi
-
-  #echo "==> Linking /etc/puppetlabs/puppet/module_workspace"
-  #if [ ! -d '/etc/puppetlabs/puppet/module_workspace' ]; then
-  #  ln -s /vagrant/module_workspace /etc/puppetlabs/puppet/module_workspace
-  #fi
 fi

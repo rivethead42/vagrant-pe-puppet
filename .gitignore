@@ -2,3 +2,4 @@
 *.gz
 .vagrant
 puppet-enterprise-*
+.DS_Store
